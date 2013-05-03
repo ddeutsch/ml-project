@@ -8,6 +8,7 @@ import java.util.Map;
 public class Tweet 
 {
 	public static Map<String, Integer> vocabulary = new HashMap<String, Integer>();
+	public static Map<Integer, String> reverseIndex = new HashMap<Integer, String>();
 
 	private static int counter = 0;
 	
@@ -27,7 +28,10 @@ public class Tweet
 		for (String word : this.words)
 		{
 			if (!vocabulary.containsKey(word))
+			{
 				vocabulary.put(word, vocabulary.size());
+				reverseIndex.put(reverseIndex.size(), word);
+			}
 		}
 	}
 	

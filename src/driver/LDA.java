@@ -31,7 +31,7 @@ import data.Tweet;
  */
 public class LDA 
 {
-	private static String input = "data/train";
+	private static String input = "data/input-test.txt";
 	
 	/** The name of the output file for the distributions of theta. */
 	private static String thetaFile = "output/theta";
@@ -86,7 +86,8 @@ public class LDA
 		LDA.parseCommandLineArguments(args);
 		
 		// load the tweets into memory
-		LDA.tweets = DataLoader.loadData(input);
+//		LDA.tweets = DataLoader.loadData(input);
+		LDA.tweets = DataLoader.loadMLData(input);
 		
 		// initialize the variables
 		LDA.initializeVariables();

@@ -37,4 +37,35 @@ public class DataLoader
 		
 		return tweets;
 	}
+	
+	public static List<Tweet> loadMLData(String fileName)
+	{
+		List<Tweet> tweets = new ArrayList<Tweet>();
+		
+		try
+		{
+			Scanner scanner = new Scanner(new FileReader(fileName));
+			
+			while (scanner.hasNextLine())
+			{
+				String line = scanner.nextLine();
+				tweets.add(new Tweet(line.charAt(0) + "", line.substring(2)));
+			}
+		}
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		return tweets;
+	}
 }
+
+
+
+
+
+
