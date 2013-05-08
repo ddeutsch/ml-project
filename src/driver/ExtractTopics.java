@@ -53,7 +53,7 @@ public class ExtractTopics
 			// read in the distributions
 			for (int v = 0; v < V; v++)
 			{
-				String split[] = scanner.nextLine().split("\t");
+				String split[] = scanner.nextLine().split("\\s");
 				
 				// extract the word for this line
 				String word = split[0];

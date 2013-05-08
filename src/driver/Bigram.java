@@ -9,13 +9,25 @@ import data.DataInitializer;
 import data.DataLoader;
 import data.Multinomial;
 import data.Tweet;
-import data.Vector2D;
-import data.Vector3D;
-import data.Vector3DD;
 
+/**
+ * This class runs the Test algorithm on the tweets
+ * from start to finish. The tweets should be read in
+ * from a Mongo Database.
+ * 
+ * This class will save the mapping from Tweet ID to the 
+ * Tweet's distribution of topics to be read in the the KMeans 
+ * clustering algorithm. The first line should be the number
+ * of documents followed by the number of topics. Then each following
+ * line should look like: 
+ * 
+ *     ID Topic1 Topic2 ... TopicK
+ * 
+ * @author Daniel Deutsch
+ */
 public class Bigram 
 {
-	private static String input = "data/input-test.txt";
+	private static String input = "data/input-train.txt";
 	
 	/** The name of the output file for the distributions of theta. */
 	private static String thetaFile = "output/theta";
@@ -23,8 +35,8 @@ public class Bigram
 	/** The name of the output file for the distributions of phi. */
 	private static String phiFile = "output/phi"; 
 	
-	private static int iterations = 600;
-	private static int burnIn = 500;
+	private static int iterations = 20;
+	private static int burnIn = 15;
 	
 	/** The parameter of the Dirichlet prior on the per-Tweet topic distributions. */
 	private static double alpha = 0.1;
@@ -35,19 +47,21 @@ public class Bigram
 	/** The number of tweets. */
 	private static int M;
 	
-	/** The vocabulary size. */
+	/** The size of the vocabulary. */
 	private static int V;
 
 	/** The number of possible topics. */
-	private static int K = 15;
+	private static int K = 25;
 
 	/** The distribution over the topics for each Tweet. */
 	private static double[][] theta = null;
 	private static double[][] thetaSum = null;
 	
 	/** The distribution over the words for each topic. */
-	private static Vector3DD phi = new Vector3DD();
-	private static Vector3DD phiSum = new Vector3DD();
+	private static SumVector phi = new SumVector();
+	private static SumVector phiSum = new SumVector();
+	
+	private static List<Double> likelihoods = new ArrayList<Double>();
 	
 	/** The topic that generated each word in each Tweet. */
 	private static int[][] z = null;
@@ -62,13 +76,12 @@ public class Bigram
 	private static int[] n_d = null;
 	
 	/** The number of tokens of word type w assigned to topic k. */
-	private static Vector2D n_kw = new Vector2D();
+	private static int[][] n_kw = null;
 	
 	/** The number of tokens assigned to topic k. */
 	private static int[] n_k = null;
 	
-	/** The counts of seeing token i assigned to k after token j. */
-	private static Vector3D n_jik = new Vector3D();
+	private static CountVector n_jik = new CountVector();
 	
 	public static void main(String[] args) throws IOException 
 	{
@@ -76,15 +89,13 @@ public class Bigram
 		Bigram.parseCommandLineArguments(args);
 		
 		// load the tweets into memory
-//		Bigram.tweets = DataLoader.loadData(input);
-		tweets = DataLoader.loadMLData(input);
+//		Test.tweets = DataLoader.loadData(input);
+		Bigram.tweets = DataLoader.loadMLData(input);
 		
 		// initialize the variables
 		Bigram.initializeVariables();
 		Bigram.initializeCounts();
 		
-		List<Double> likelihoods = new ArrayList<Double>();
-
 		// begin sampling
 		for (int t = 0; t < Bigram.iterations; t++)
 		{
@@ -96,35 +107,32 @@ public class Bigram
 				for (int i = 1; i < tweet.size(); i++)
 				{
 					String word = tweet.get(i);
+					String previous = tweet.get(i - 1);
 					
-					int w = Tweet.vocabulary.get(word);
 					int k = z[d][i];
-					int j = Tweet.vocabulary.get(tweet.get(i - 1));
+					int w = Tweet.vocabulary.get(word);
+					int j = Tweet.vocabulary.get(previous);
 					
 					// update counts to exclude word w_{d,i}
 					n_dk[d][k]--;
 					n_d[d]--;
-					n_kw.decrement(k, w);
+					n_kw[k][w]--;
 					n_k[k]--;
-
-					// bigram counts
 					n_jik.decrement(j, w, k);
 					
 					// sample for z
-					k = Bigram.bigramSampleZ(d, w, j);
-
+					k = Bigram.sampleZ(d, w, j);
 					z[d][i] = k;
 					
 					// update counts to include the new information
 					n_dk[d][k]++;
 					n_d[d]++;
-					n_kw.increment(k, w);
+					n_kw[k][w]++;
 					n_k[k]++;
-					
-					// bigram counts
 					n_jik.increment(j, w, k);
 				}
 			}
+			
 			
 			Bigram.calculateTheta(t);
 			Bigram.calculatePhi(t);
@@ -181,9 +189,10 @@ public class Bigram
 	private static void initializeCounts()
 	{
 		// n_dk, n_d, n_kw, n_k
-		n_dk = new int[M][K];
-		n_d = new int[M];
-		n_k = new int[K];
+		n_dk = new int[Bigram.tweets.size()][Bigram.K];
+		n_d = new int[Bigram.tweets.size()];
+		n_kw = new int[Bigram.K][Tweet.vocabulary.size()];
+		n_k = new int[Bigram.K];
 		
 		for (int d = 0; d < Bigram.tweets.size(); d++)
 		{
@@ -191,33 +200,38 @@ public class Bigram
 			
 			for (int i = 1; i < tweet.size(); i++)
 			{
+				String word = tweet.get(i);
+				String previous = tweet.get(i - 1);
+				
+				int w = Tweet.vocabulary.get(word);
+				int j = Tweet.vocabulary.get(previous);
 				int k = z[d][i];
-				int w = Tweet.vocabulary.get(tweet.get(i));
 				
 				n_dk[d][k]++;
 				n_d[d]++;
-				n_kw.increment(k, w);
+				n_kw[k][w]++;
 				n_k[k]++;
-				
-				// update the bigram counts
-				int j = Tweet.vocabulary.get(tweet.get(i - 1));
 				n_jik.increment(j, w, k);
 			}
 		}
 	}
 	
-	private static int bigramSampleZ(int d, int i, int j)
+	/**
+	 * Sample for z based on the count statistics that are being kept.
+	 * @param d The index of the Tweet.
+	 * @param w The index of the corresponding word in the vocabulary.
+	 * @return The sampled value for z.
+	 */
+	private static int sampleZ(int d, int i, int j)
 	{
-		double[] probabilities = new double[K];
-		
+		double[] probabilities = new double[Bigram.K];
+
 		for (int k = 0; k < K; k++)
 		{
-			Integer njik = n_jik.get(j, i, k);
-			if (njik == null)
-				njik = 0;
+			int njik = n_jik.get(j, i, k);
 			
-			probabilities[k] = ((njik + beta) / (n_kw.get(k, i) + V * beta))
-							 * ((n_dk[d][k] + alpha) / (n_d[d] + K * alpha));
+			probabilities[k] = ((n_dk[d][k] + alpha) / (n_d[d] + K * alpha)) 
+					 		 * ((njik + beta) / (n_k[k] + V * beta));
 		}
 		
 		return new Multinomial(probabilities).sample();
@@ -234,6 +248,7 @@ public class Bigram
 			for (int k = 0; k < Bigram.K; k++)
 			{
 				Bigram.theta[d][k] = (n_dk[d][k] + alpha) / (n_d[k] + K * alpha);
+				
 				if (t > burnIn)
 					Bigram.thetaSum[d][k] += Bigram.theta[d][k];
 			}
@@ -246,8 +261,6 @@ public class Bigram
 	 */
 	private static void calculatePhi(int t)
 	{
-		int W = Tweet.vocabulary.size();
-		
 		for (String key : n_jik)
 		{
 			String[] split = key.split(",");
@@ -255,11 +268,10 @@ public class Bigram
 			int i = Integer.parseInt(split[1]);
 			int k = Integer.parseInt(split[2]);
 			
-			double value = (n_jik.get(j, i, k) + beta) / (n_k[k] + W * beta);
+			phi.put(j, i, k, (n_jik.get(k, j, i) + beta) / (n_k[k] + V * beta));
 			
-			phi.put(j, i, k, value);
 			if (t > burnIn)
-				phiSum.increment(j, i, k, value);
+				phiSum.increment(j, i, k, phi.get(j, i, k));
 		}
 	}
 	
@@ -270,7 +282,6 @@ public class Bigram
 	private static double calculateLikelihood()
 	{
 		double likelihood = 0;
-		
 		for (int d = 0; d < Bigram.tweets.size(); d++)
 		{
 			Tweet tweet = Bigram.tweets.get(d);
@@ -279,15 +290,16 @@ public class Bigram
 				// get the index of the word in the vocabulary
 				int i = Tweet.vocabulary.get(tweet.get(w));
 				int j = Tweet.vocabulary.get(tweet.get(w - 1));
-				
 				double logSum = 0;
 
-				for (int k = 0; k < K; k++)
+				for (int k = 0; k < Bigram.K; k++)
 					logSum += theta[d][k] * phi.get(j, i, k);
 				
 				likelihood += Math.log(logSum);
 			}
 		}
+		
+		likelihoods.add(likelihood);
 		System.out.println(likelihood);
 		return likelihood;
 	}
@@ -331,96 +343,36 @@ public class Bigram
 	 */
 	private static void writePhiToFile()
 	{
-		double[][] phi_collapsed = new double[V][K];
+		// used to store marginalized values
+		double[][] phiCollapsed = new double[V][K];
+		
 		try 
 		{
 			FileWriter writer = new FileWriter(Bigram.phiFile);
 			writer.write(Tweet.vocabulary.size() + " " + Bigram.K + "\n");
 			
-//			Set<String> cache = new HashSet<String>();
-			
-			// marginalize over j, the previous word
-//			for (String key : phiSum)
-//			{
-//				String[] split = key.split(",");
-//				int j = Integer.parseInt(split[0]);
-//				int i = Integer.parseInt(split[1]);
-//				int k = Integer.parseInt(split[2]);
-//				
-//				phi_collapsed[i][k] += phiSum.get(j, i, k);
-//
-//				
-//				
-//				
-////				if (cache.contains(i + "," + j))
-////					continue;
-////				else
-////					cache.add(i + "," + j);
-//				
-//				
-////				for (int k = 0; k < K; k++)
-////					phi_collapsed[i][k] += phi.get(j,i,k);
-//			}
-//			
-//			// print the distributions to the file
-//			for (int v = 0; v < V; ++v) 
-//			{
-//				writer.write(Tweet.reverseIndex.get(v));
-//				
-//				double[] normalized = Multinomial.normalize(phi_collapsed[v]);
-//				
-//				if (normalized[0] == Double.NaN)
-//					continue;
-//				
-//				for (int k = 0; k < K; ++k)
-//					writer.write("\t" + normalized[k]);
-//
-//				writer.write("\n");
-//			}
-			
-			
-//			Set<String> cache = new HashSet<String>();
-//			for (String key : phiSum)
-//			{
-//				String[] split = key.split(",");
-//				int j = Integer.parseInt(split[0]);
-//				int i = Integer.parseInt(split[1]);
-//
-//				if (cache.contains(i + "," + j))
-//					continue;
-//				else
-//					cache.add(i + "," + j);
-//				
-//				double[] dist = new double[K];
-//				for (int k = 0; k < K; k++)
-//					dist[k] = phiSum.get(j, i, k);
-//				dist = Multinomial.normalize(dist);
-//				
-//				writer.write(String.format("%s#%s", Tweet.reverseIndex.get(j), Tweet.reverseIndex.get(i)));
-//				
-//				for (int k = 0; k < K; k++)
-//					writer.write("\t" + dist[k]);
-//				writer.write("\n");
-//			}
-			
-			
-			for (int v = 0; v < V; v++)
+			for (String key : phiSum)
 			{
-				writer.write(Tweet.reverseIndex.get(v));
+				String[] split = key.split(",");
+				int j = Integer.parseInt(split[0]);
+				int i = Integer.parseInt(split[1]);
+				int k = Integer.parseInt(split[2]);
 				
-				double[] dist = new double[K];
-				for (int k = 0; k < K; k++)
-					dist[k] = n_kw.get(k, v);
-				
-				dist = Multinomial.normalize(dist);
-				
-				for (int k = 0; k < K; k++)
-					writer.write("\t" + dist[k]);
-				
-				writer.write("\n");
+				phiCollapsed[i][k] += phiSum.get(j, i, k);
 			}
 			
-			
+			for (int w = 0; w < V; w++)
+			{
+				writer.write(Tweet.reverseIndex.get(w));
+				
+				double[] normalized = Multinomial.normalize(phiCollapsed[w]);
+				if (normalized[0] == Double.NaN)
+					continue;
+				
+				for (int k = 0; k < K; k++)
+					writer.write(" " + normalized[k]);
+				writer.write("\n");
+			}
 			
 			writer.close();
 		} 

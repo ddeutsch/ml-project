@@ -31,7 +31,7 @@ import data.Tweet;
  */
 public class LDA 
 {
-	private static String input = "data/input-test.txt";
+	private static String input = "data/train";
 	
 	/** The name of the output file for the distributions of theta. */
 	private static String thetaFile = "output/theta";
@@ -39,8 +39,8 @@ public class LDA
 	/** The name of the output file for the distributions of phi. */
 	private static String phiFile = "output/phi"; 
 	
-	private static int iterations = 1100;
-	private static int burnIn = 1000;
+	private static int iterations = 20;
+	private static int burnIn = 10;
 	
 	/** The parameter of the Dirichlet prior on the per-Tweet topic distributions. */
 	private static double alpha = 0.1;
@@ -52,7 +52,7 @@ public class LDA
 	private static int M;
 
 	/** The number of possible topics. */
-	private static int K = 5;
+	private static int K = 15;
 
 	/** The distribution over the topics for each Tweet. */
 	private static double[][] theta = null;
@@ -86,8 +86,8 @@ public class LDA
 		LDA.parseCommandLineArguments(args);
 		
 		// load the tweets into memory
-//		LDA.tweets = DataLoader.loadData(input);
-		LDA.tweets = DataLoader.loadMLData(input);
+		LDA.tweets = DataLoader.loadData(input);
+//		LDA.tweets = DataLoader.loadMLData(input);
 		
 		// initialize the variables
 		LDA.initializeVariables();
@@ -140,8 +140,6 @@ public class LDA
 		LDA.writeThetaToFile();
 		LDA.writePhiToFile();
 		LDA.writeLikelihoodToFile(likelihoods);
-		
-		LDA.plotLikelihood(likelihoods);
 	}
 	
 	/**

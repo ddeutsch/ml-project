@@ -15,6 +15,8 @@ import java.util.Set;
  */
 public class DataInitializer 
 {
+	private static Random random = new Random();
+	
 	/**
 	 * Initializes the vector gamma, the genre for each Song.
 	 * @param numberOfSongs The total number of Songs.
@@ -27,7 +29,6 @@ public class DataInitializer
 		int[] gamma = new int[numberOfSongs];
 		
 		// generate a random genre for each song
-		Random random = new Random();
 		for (int i = 0; i < gamma.length; i++)
 			gamma[i] = random.nextInt(numberOfGenres);
 		
@@ -91,8 +92,6 @@ public class DataInitializer
 		// create a jagged array for each song
 		int[][] z = new int[tweets.size()][0];
 		
-		Random random = new Random();
-		
 		for (int s = 0; s < tweets.size(); s++)
 		{
 			Tweet tweet = tweets.get(s);
@@ -115,7 +114,6 @@ public class DataInitializer
 	{
 		double[][] clusters = new double[C][K];
 		
-		Random random = new Random();
 		Set<Integer> set = new HashSet<Integer>();
 		for (int c = 0; c < C; c++)
 		{

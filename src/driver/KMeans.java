@@ -43,7 +43,7 @@ public class KMeans
 	private static String assignmentFile = "output/assignments";
 	
 	/** The number of clusters to use. */
-	private static int C = 4;
+	private static int C = 1000;
 	
 	/** The centroids of the clusters. */
 	private static double[][] clusters = null;
@@ -54,7 +54,7 @@ public class KMeans
 	private static List<List<Integer>> assignments = new ArrayList<List<Integer>>();
 	
 	/** The number of EM iterations to do. */
-	private static int iterations = 1000;
+	private static int iterations = 30;
 	
 	/** The number of Documents. */
 	private static int D;
@@ -94,6 +94,7 @@ public class KMeans
 			
 			for (int iteration = 0; iteration < iterations; iteration++)
 			{
+				System.out.println(iteration);
 				KMeans.assignToClusters();
 				KMeans.computeCenters();
 			}
@@ -102,7 +103,7 @@ public class KMeans
 			KMeans.writeAssignments();
 			
 			Map<String, Integer> labelIds = new HashMap<String, Integer>();
-			int[][] counts = new int[C][C];
+			int[][] counts = new int[C][3];
 			for (int c = 0; c < C; c++)
 			{
 				List<Integer> ids = assignments.get(c);
@@ -123,7 +124,7 @@ public class KMeans
 			
 			for (int c = 0; c < C; c++)
 			{
-				for (int i = 0; i < C; i++)
+				for (int i = 0; i < 3; i++)
 					System.out.print(counts[c][i] + " ");
 				System.out.println();
 			}
