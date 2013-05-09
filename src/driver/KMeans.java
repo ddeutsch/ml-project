@@ -14,21 +14,6 @@ import data.DataInitializer;
 import data.DataLoader;
 import data.Tweet;
 
-/**
- * This class is responsible for reading in the topic
- * distributions for each Song from a file, then running
- * a K-Means clustering algorithm on the distributions.
- * It should output a file in the format:
- * 
- *     ClusterID|Song1ID|Song2ID|...|SongNID
- *     
- * Depending on the size of the data, we may have to merge
- * some data points together and simply get rid of some
- * songs. The unique Song IDs should still remain the
- * same.
- * 
- * @author Daniel Deutsch
- */
 public class KMeans 
 {
 	private static String tweetsFile = "data/train";
@@ -159,7 +144,7 @@ public class KMeans
 				KMeans.C = Integer.parseInt(args[i + 1]);
 			else if (args[i].equals("-iterations"))
 				KMeans.iterations = Integer.parseInt(args[i + 1]);
-			else if (args[i].equals("-tweets_file"))
+			else if (args[i].equals("-input_file"))
 				KMeans.tweetsFile = args[i + 1];
 		}
 	}

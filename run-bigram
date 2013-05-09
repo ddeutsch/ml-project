@@ -1,0 +1,1 @@
+./bigram -Xmx1024M -Xms1024M -input_file data/train -K 5 -iterations 10 -burn_in 5 -theta_file output/bigram_theta -phi_file output/bigram_phi

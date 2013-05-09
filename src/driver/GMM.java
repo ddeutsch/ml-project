@@ -2,8 +2,8 @@ package driver;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,6 +22,8 @@ import data.Multinomial;
 public class GMM 
 {
 	private static String inputFile = "output/theta";
+	private static String clustersFile = "output/clusters";
+	private static String assignmentsFile = "output/assignments";
 	
 	private static ArrayRealVector[] data;
 	private static int[] Z = null;
@@ -42,6 +44,7 @@ public class GMM
 	
 	public static void main(String[] args) 
 	{
+		parseCommandLineArgs(args);
 		readData();
 		
 		//initialize mean to [0,...0]
@@ -160,14 +163,8 @@ public class GMM
 		
 			
 		}
-		System.out.println("FINAL");
-		for (int key : clusters.keySet()) {
-			Cluster clus = clusters.get(key);
-			System.out.println("Mean\t" + clus.mean);
-			System.out.println(clus.points.size());
-			System.out.println();
-		}
 		
+		writeAssignments();
 
 	}
 	
@@ -197,6 +194,19 @@ public class GMM
             log_likelihood -= 0.5 * np.dot(np.dot(mean_var, 
                 self.params[self.z[n]].inv_covar()), mean_var.transpose())
 		 */
+	}
+	
+	private static void parseCommandLineArgs(String[] args)
+	{
+		for (int i = 0; i < args.length; i++)
+		{
+			if (args[i].equals("-input_file"))
+				inputFile = args[i + 1];
+			else if (args[i].equals("-clusters_file"))
+				clustersFile = args[i + 1];
+			else if (args[i].equals("-assignments_file"))
+				assignmentsFile = args[i + 1];
+		}
 	}
 	
 	public static double[][] identityMatrix(int d) {
@@ -243,5 +253,35 @@ public class GMM
 			e.printStackTrace();
 		}
 		
+	}
+	
+	private static void writeAssignments()
+	{
+		System.out.println("FINAL");
+		for (int key : clusters.keySet()) {
+			Cluster clus = clusters.get(key);
+			System.out.println("Mean\t" + clus.mean);
+			System.out.println(clus.points.size());
+			System.out.println();
+		}
+		
+		try
+		{
+			FileWriter writer = new FileWriter(assignmentsFile);
+			
+			// WE NEED TO FIGURE OUT HOW THE NUMBER OF CLUSTERS CHANGES
+			writer.write(clusters.size() + " " + data.length + "\n");
+			
+			for (int key : clusters.keySet())
+			{
+				Cluster cluster = clusters.get(key);
+				for (Integer id : cluster.points)
+					writer.write(id + " " + key + "\n");
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 }

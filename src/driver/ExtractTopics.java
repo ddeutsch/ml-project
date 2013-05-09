@@ -10,16 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-/**
- * This class is responsible for extracting the top words
- * from each topic distribution. The input file should contain
- * each word followed by the value for that word in
- * each distribution of topics. The first line of the input
- * should be two integers, the size of the vocabulary and
- * the number of topics.
- * 
- * @author Daniel Deutsch
- */
 public class ExtractTopics 
 {
 	/** The file to find the topic-word distributions. */

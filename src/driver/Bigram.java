@@ -10,24 +10,9 @@ import data.DataLoader;
 import data.Multinomial;
 import data.Tweet;
 
-/**
- * This class runs the Test algorithm on the tweets
- * from start to finish. The tweets should be read in
- * from a Mongo Database.
- * 
- * This class will save the mapping from Tweet ID to the 
- * Tweet's distribution of topics to be read in the the KMeans 
- * clustering algorithm. The first line should be the number
- * of documents followed by the number of topics. Then each following
- * line should look like: 
- * 
- *     ID Topic1 Topic2 ... TopicK
- * 
- * @author Daniel Deutsch
- */
 public class Bigram 
 {
-	private static String input = "data/input-train.txt";
+	private static String input = "data/train";
 	
 	/** The name of the output file for the distributions of theta. */
 	private static String thetaFile = "output/theta";
@@ -51,7 +36,7 @@ public class Bigram
 	private static int V;
 
 	/** The number of possible topics. */
-	private static int K = 25;
+	private static int K = 5;
 
 	/** The distribution over the topics for each Tweet. */
 	private static double[][] theta = null;
@@ -89,8 +74,8 @@ public class Bigram
 		Bigram.parseCommandLineArguments(args);
 		
 		// load the tweets into memory
-//		Test.tweets = DataLoader.loadData(input);
-		Bigram.tweets = DataLoader.loadMLData(input);
+		Bigram.tweets = DataLoader.loadData(input);
+//		Bigram.tweets = DataLoader.loadMLData(input);
 		
 		// initialize the variables
 		Bigram.initializeVariables();
@@ -178,6 +163,8 @@ public class Bigram
 				Bigram.thetaFile = args[i + 1];
 			else if (args[i].equals("-phi_file"))
 				Bigram.phiFile = args[i + 1];
+			else if (args[i].equals("-input_file"))
+				Bigram.input = args[i + 1];
 		}
 	}
 	
@@ -300,7 +287,7 @@ public class Bigram
 		}
 		
 		likelihoods.add(likelihood);
-		System.out.println(likelihood);
+//		System.out.println(likelihood);
 		return likelihood;
 	}
 	
@@ -363,12 +350,18 @@ public class Bigram
 			
 			for (int w = 0; w < V; w++)
 			{
+				boolean allZero = true;
+				for (int i = 0; i < phiCollapsed[w].length; i++)
+				{
+					if (phiCollapsed[w][i] != 0)
+						allZero = false;
+				}
 				writer.write(Tweet.reverseIndex.get(w));
 				
 				double[] normalized = Multinomial.normalize(phiCollapsed[w]);
-				if (normalized[0] == Double.NaN)
-					continue;
-				
+				if (allZero)
+					normalized = new double[phiCollapsed[w].length];
+					
 				for (int k = 0; k < K; k++)
 					writer.write(" " + normalized[k]);
 				writer.write("\n");

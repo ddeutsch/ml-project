@@ -1,0 +1,1 @@
+./lda -Xmx1024M -Xms1024M -input_file data/train -K 25 -iterations 10 -burn_in 5 -theta_file output/lda_theta -phi_file output/lda_phi

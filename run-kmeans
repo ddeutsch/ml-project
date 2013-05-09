@@ -1,0 +1,6 @@
+
+# lda
+./kmeans -input_file data/train -C 50 -iterations 100 -theta_file output/lda_theta -clusters_file output/lda_kmeans_clusters -assignments_file output/lda_kmeans_assignments
+
+# bigram
+./kmeans -input_file data/train -C 50 -iterations 100 -theta_file output/bigram_theta -clusters_file output/bigram_kmeans_clusters -assignments_file output/bigram_kmeans_assignments

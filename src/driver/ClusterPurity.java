@@ -23,30 +23,103 @@ public class ClusterPurity
 	
 	public static void main(String[] args) 
 	{
+		readCommandLineArgs(args);
+		
 		tweets = DataLoader.loadData(dataFile);
 		readAssignments();
+		
+		int numCorrect = 0;
+		int total = 0;
 		
 		for (Integer cluster : clusters.keySet())
 		{
 			List<Integer> labels = clusters.get(cluster);
-			System.out.println(purity(labels));
+			double purity = purity(labels);
+			
+			if (purity > 0.8)
+			{
+				// now we want to assign labels
+				String majorityLabel = Tweet.labels.get(getMajorityLabel(labels));
+				
+				for (Integer id : labels)
+				{
+					Tweet tweet = tweets.get(id);
+					if (!tweet.isTrain())
+					{
+						if (tweet.label().equals(majorityLabel))
+							numCorrect++;
+						total++;
+					}
+				}
+			}
 		}
+		
+		System.out.println(numCorrect + " / " + total + " correct");
+		System.out.println((double) numCorrect / total);
+	}
+	
+	private static void readCommandLineArgs(String[] args)
+	{
+		for (int i = 0; i < args.length; i++)
+		{
+			if (args[i].equals("-input_file"))
+				dataFile = args[i + 1];
+			else if (args[i].equals("-assignments_file"))
+				assignmentsFile = args[i + 1];
+				
+		}
+	}
+	
+	private static int getMajorityLabel(List<Integer> labels)
+	{
+		int[] counts = new int[Tweet.labels.size()];
+		
+		for (Integer id : labels)
+		{
+			if (tweets.get(id).isTrain())
+			{
+				Tweet tweet = tweets.get(id);
+				counts[Tweet.labels.indexOf(tweet.label())]++;
+			}
+		}
+		
+		int maxCount = -1;
+		int maxLabel = -1;
+		for (int i = 0; i < counts.length; i++)
+		{
+			if (counts[i] > maxCount)
+			{
+				maxCount = counts[i];
+				maxLabel = i;
+			}
+		}
+		
+		return maxLabel;
 	}
 	
 	private static double purity(List<Integer> labels)
 	{
 		int[] counts = new int[Tweet.labels.size()];
+		int numTraining = 0;
+		
 		for (Integer id : labels)
 		{
-			Tweet tweet = tweets.get(id);
-			counts[Tweet.labels.indexOf(tweet.label())]++;
+			if (tweets.get(id).isTrain())
+			{
+				Tweet tweet = tweets.get(id);
+				counts[Tweet.labels.indexOf(tweet.label())]++;
+				numTraining++;
+			}
 		}
 		
 		int maxCount = -1;
 		for (int i = 0; i < counts.length; i++)
 			maxCount = Math.max(maxCount, counts[i]);
 
-		return ((double) maxCount / labels.size());
+		if (numTraining == 0)
+			return 0.0;
+		
+		return ((double) maxCount / numTraining);
 	}
 	
 	private static void readAssignments()

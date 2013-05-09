@@ -5,30 +5,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JFrame;
-
-import org.math.plot.Plot2DPanel;
-
 import data.DataInitializer;
 import data.DataLoader;
 import data.Multinomial;
 import data.Tweet;
 
-/**
- * This class runs the LDA algorithm on the tweets
- * from start to finish. The tweets should be read in
- * from a Mongo Database.
- * 
- * This class will save the mapping from Tweet ID to the 
- * Tweet's distribution of topics to be read in the the KMeans 
- * clustering algorithm. The first line should be the number
- * of documents followed by the number of topics. Then each following
- * line should look like: 
- * 
- *     ID Topic1 Topic2 ... TopicK
- * 
- * @author Daniel Deutsch
- */
 public class LDA 
 {
 	private static String input = "data/train";
@@ -177,6 +158,8 @@ public class LDA
 				LDA.thetaFile = args[i + 1];
 			else if (args[i].equals("-phi_file"))
 				LDA.phiFile = args[i + 1];
+			else if (args[i].equals("-input_file"))
+				LDA.input = args[i + 1];
 		}
 	}
 	
@@ -385,19 +368,5 @@ public class LDA
 		{
 			e.printStackTrace();
 		}
-	}
-	
-	private static void plotLikelihood(List<Double> likelihoods)
-	{
-		Plot2DPanel plot = new Plot2DPanel();
-		double[] data = new double[likelihoods.size()];
-		for (int i = 0; i < likelihoods.size(); i++)
-			data[i] = likelihoods.get(i);
-		
-		plot.addLinePlot("Likelihood", data);
-		
-		JFrame frame = new JFrame("Plot");
-		frame.setContentPane(plot);
-		frame.setVisible(true);
 	}
 }
