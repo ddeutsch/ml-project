@@ -20,6 +20,8 @@ public class LDA
 	/** The name of the output file for the distributions of phi. */
 	private static String phiFile = "output/phi"; 
 	
+	private static String likelihoodFile = "output/likelihood";
+	
 	private static int iterations = 20;
 	private static int burnIn = 10;
 	
@@ -109,13 +111,10 @@ public class LDA
 				}
 			}
 			
-			likelihoods.add(LDA.calculateLikelihood());
 			
-			if (t > burnIn)
-			{
-				LDA.calculateTheta();
-				LDA.calculatePhi();
-			}
+			LDA.calculateTheta(t);
+			LDA.calculatePhi(t);
+			likelihoods.add(LDA.calculateLikelihood());
 		}
 		
 		LDA.writeThetaToFile();
@@ -160,6 +159,8 @@ public class LDA
 				LDA.phiFile = args[i + 1];
 			else if (args[i].equals("-input_file"))
 				LDA.input = args[i + 1];
+			else if (args[i].equals("-likelihood_file"))
+				LDA.likelihoodFile = args[i + 1];
 		}
 	}
 	
@@ -220,14 +221,16 @@ public class LDA
 	 * Calculates the values for theta given the
 	 * current counts.
 	 */
-	private static void calculateTheta()
+	private static void calculateTheta(int t)
 	{
 		for (int d = 0; d < LDA.tweets.size(); d++)
 		{
 			for (int k = 0; k < LDA.K; k++)
 			{
 				LDA.theta[d][k] = (n_dk[d][k] + alpha) / (n_d[k] + K * alpha);
-				LDA.thetaSum[d][k] += LDA.theta[d][k];
+				
+				if (t > burnIn)
+					LDA.thetaSum[d][k] += LDA.theta[d][k];
 			}
 		}
 	}
@@ -236,7 +239,7 @@ public class LDA
 	 * Calculates the values for phi given the
 	 * current counts
 	 */
-	private static void calculatePhi()
+	private static void calculatePhi(int t)
 	{
 		int W = Tweet.vocabulary.size();
 		
@@ -245,7 +248,9 @@ public class LDA
 			for (int w = 0; w < W; w++)
 			{
 				LDA.phi[k][w] = (n_kw[k][w] + beta) / (n_k[k] + W * beta);
-				LDA.phiSum[k][w] += LDA.phi[k][w];
+				
+				if (t > burnIn)
+					LDA.phiSum[k][w] += LDA.phi[k][w];
 			}
 		}
 	}
@@ -357,7 +362,7 @@ public class LDA
 	{
 		try 
 		{
-			FileWriter writer = new FileWriter("output/likelihood");
+			FileWriter writer = new FileWriter(likelihoodFile);
 
 			for (Double likelihood : likelihoods)
 				writer.write(likelihood + "\n");

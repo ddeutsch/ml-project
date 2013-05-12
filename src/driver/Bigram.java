@@ -20,6 +20,8 @@ public class Bigram
 	/** The name of the output file for the distributions of phi. */
 	private static String phiFile = "output/phi"; 
 	
+	private static String likelihoodFile = "output/likelihood";
+	
 	private static int iterations = 20;
 	private static int burnIn = 15;
 	
@@ -165,6 +167,8 @@ public class Bigram
 				Bigram.phiFile = args[i + 1];
 			else if (args[i].equals("-input_file"))
 				Bigram.input = args[i + 1];
+			else if (args[i].equals("-likelihood_file"))
+				Bigram.likelihoodFile = args[i + 1];
 		}
 	}
 	
@@ -379,7 +383,7 @@ public class Bigram
 	{
 		try 
 		{
-			FileWriter writer = new FileWriter("output/likelihood");
+			FileWriter writer = new FileWriter(likelihoodFile);
 
 			for (Double likelihood : likelihoods)
 				writer.write(likelihood + "\n");

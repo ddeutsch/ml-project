@@ -1,6 +1,9 @@
 
 # lda
-./gmm -input_file data/train -C 50 -iterations 100 -theta_file output/lda_theta -clusters_file output/lda_kmeans_clusters -assignments_file output/lda_kmeans_assignments
+./gmm -iterations 100 -theta_file output/lda_theta -clusters_file output/lda_gmm_clusters -assignments_file output/lda_gmm_assignments
 
 # bigram
-./gmm -input_file data/train -C 50 -iterations 100 -theta_file output/bigram_theta -clusters_file output/bigram_kmeans_clusters -assignments_file output/bigram_kmeans_assignments
+./gmm -iterations 100 -theta_file output/bigram_theta -clusters_file output/bigram_gmm_clusters -assignments_file output/bigram_gmm_assignments
+
+# pca
+./gmm -iterations 100 -theta_file output/pca_theta -clusters_file output/pca_gmm_clusters -assignments_file output/pca_gmm_assignments

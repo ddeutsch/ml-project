@@ -4,3 +4,6 @@
 
 # bigram
 ./kmeans -input_file data/train -C 50 -iterations 100 -theta_file output/bigram_theta -clusters_file output/bigram_kmeans_clusters -assignments_file output/bigram_kmeans_assignments
+
+# pca
+./kmeans -input_file data/train -C 50 -iterations 100 -theta_file output/pca_theta clusters_file output/pca_kmeans_clusters -assignments_file output/pca_kmeans_assignments

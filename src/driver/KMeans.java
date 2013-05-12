@@ -16,7 +16,7 @@ import data.Tweet;
 
 public class KMeans 
 {
-	private static String tweetsFile = "data/train";
+//	private static String tweetsFile = "data/train";
 	
 	/** The file which contains each Song's topic distributions. */
 	private static String distributionFile = "output/theta";
@@ -62,7 +62,7 @@ public class KMeans
 		KMeans.parseCommandLineArgs(args);
 		
 		// load the data
-		List<Tweet> tweets = DataLoader.loadData(tweetsFile);
+//		List<Tweet> tweets = DataLoader.loadData(tweetsFile);
 		
 		try 
 		{
@@ -87,37 +87,37 @@ public class KMeans
 			KMeans.writeClusters();
 			KMeans.writeAssignments();
 			
-			Map<String, Integer> labelIds = new HashMap<String, Integer>();
-			int[][] counts = new int[C][3];
-			for (int c = 0; c < C; c++)
-			{
-				List<Integer> ids = assignments.get(c);
-				for (Integer id : ids)
-				{
-					String label = tweets.get(id).label();
-					int index = -1;
-					if (labelIds.containsKey(label))
-						index = labelIds.get(label);
-					else
-					{
-						index = labelIds.size();
-						labelIds.put(label, index);
-					}
-					counts[c][index]++;
-				}
-			}
-			
-			for (int c = 0; c < C; c++)
-			{
-				for (int i = 0; i < 3; i++)
-					System.out.print(counts[c][i] + " ");
-				System.out.println();
-			}
-			
-			for (String label : labelIds.keySet())
-			{
-				System.out.println(label + " : " + labelIds.get(label));
-			}
+//			Map<String, Integer> labelIds = new HashMap<String, Integer>();
+//			int[][] counts = new int[C][3];
+//			for (int c = 0; c < C; c++)
+//			{
+//				List<Integer> ids = assignments.get(c);
+//				for (Integer id : ids)
+//				{
+//					String label = tweets.get(id).label();
+//					int index = -1;
+//					if (labelIds.containsKey(label))
+//						index = labelIds.get(label);
+//					else
+//					{
+//						index = labelIds.size();
+//						labelIds.put(label, index);
+//					}
+//					counts[c][index]++;
+//				}
+//			}
+//			
+//			for (int c = 0; c < C; c++)
+//			{
+//				for (int i = 0; i < 3; i++)
+//					System.out.print(counts[c][i] + " ");
+//				System.out.println();
+//			}
+//			
+//			for (String label : labelIds.keySet())
+//			{
+//				System.out.println(label + " : " + labelIds.get(label));
+//			}
 			
 		}
 		catch (FileNotFoundException e) 
@@ -144,8 +144,8 @@ public class KMeans
 				KMeans.C = Integer.parseInt(args[i + 1]);
 			else if (args[i].equals("-iterations"))
 				KMeans.iterations = Integer.parseInt(args[i + 1]);
-			else if (args[i].equals("-input_file"))
-				KMeans.tweetsFile = args[i + 1];
+//			else if (args[i].equals("-input_file"))
+//				KMeans.tweetsFile = args[i + 1];
 		}
 	}
 	

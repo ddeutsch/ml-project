@@ -36,7 +36,7 @@ public class ClusterPurity
 			List<Integer> labels = clusters.get(cluster);
 			double purity = purity(labels);
 			
-			if (purity > 0.8)
+			if (purity > 0.5)
 			{
 				// now we want to assign labels
 				String majorityLabel = Tweet.labels.get(getMajorityLabel(labels));
