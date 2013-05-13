@@ -1,0 +1,17 @@
+# lda_kmeans
+./purity -input_file data/train -assignments_file output/lda_kmeans_assignments
+
+# bigram_kmeans
+./purity -input_file data/train -assignments_file output/bigram_kmeans_assignments
+
+# pca_kmeans
+./purity -input_file data/train -assignments_file output/pca_kmeans_assignments
+
+# lda_gmm
+./purity -input_file data/train -assignments_file output/lda_gmm_assignments
+
+# bigram_gmm
+./purity -input_file data/train -assignments_file output/bigram_gmm_assignments
+
+# pca_gmm
+./purity -input_file data/train -assignments_file output/pca_gmm_assignments

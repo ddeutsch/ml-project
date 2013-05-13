@@ -1,0 +1,321 @@
+# LDA
+./lda -K 10 -iterations 1100 -burn_in 1000 -theta_file accuracy/lda_10_theta -phi_file accuracy/lda_10_phi -likelihood_file accuracy/lda_10_likelihood -input_file data/train
+
+./lda -K 25 -iterations 1100 -burn_in 1000 -theta_file accuracy/lda_25_theta -phi_file accuracy/lda_25_phi -likelihood_file accuracy/lda_25_likelihood -input_file data/train
+
+./lda -K 50 -iterations 1100 -burn_in 1000 -theta_file accuracy/lda_50_theta -phi_file accuracy/lda_50_phi -likelihood_file accuracy/lda_50_likelihood -input_file data/train
+
+# Bigram
+./bigram -K 10 -iterations 1100 -burn_in 1000 -theta_file accuracy/bigram_10_theta -phi_file accuracy/bigram_10_phi -likelihood_file accuracy/bigram_10_likelihood -input_file data/train
+
+./bigram -K 25 -iterations 1100 -burn_in 1000 -theta_file accuracy/bigram_25_theta -phi_file accuracy/bigram_25_phi -likelihood_file accuracy/bigram_25_likelihood -input_file data/train
+
+./bigram -K 50 -iterations 1100 -burn_in 1000 -theta_file accuracy/bigram_50_theta -phi_file accuracy/bigram_50_phi -likelihood_file accuracy/bigram_50_likelihood -input_file data/train
+
+# PCA
+./pca data/train 10 10 > accuracy/pca_10_theta
+
+./pca data/train 25 10 > accuracy/pca_25_theta
+
+./pca data/train 50 10 > accuracy/pca_50_theta
+
+# K-Means LDA
+./kmeans -C 25 -theta_file accuracy/lda_10_theta -clusters_file accuracy/lda_10_25_kmeans_clusters -assignments_file accuracy/lda_10_25_kmeans_assignments -iterations 100
+
+./kmeans -C 50 -theta_file accuracy/lda_10_theta -clusters_file accuracy/lda_10_50_kmeans_clusters -assignments_file accuracy/lda_10_50_kmeans_assignments -iterations 100
+
+./kmeans -C 100 -theta_file accuracy/lda_10_theta -clusters_file accuracy/lda_10_100_kmeans_clusters -assignments_file accuracy/lda_10_100_kmeans_assignments -iterations 100
+
+./kmeans -C 25 -theta_file accuracy/lda_25_theta -clusters_file accuracy/lda_25_25_kmeans_clusters -assignments_file accuracy/lda_25_25_kmeans_assignments -iterations 100
+
+./kmeans -C 50 -theta_file accuracy/lda_25_theta -clusters_file accuracy/lda_25_50_kmeans_clusters -assignments_file accuracy/lda_25_50_kmeans_assignments -iterations 100
+
+./kmeans -C 100 -theta_file accuracy/lda_25_theta -clusters_file accuracy/lda_25_100_kmeans_clusters -assignments_file accuracy/lda_25_100_kmeans_assignments -iterations 100
+
+./kmeans -C 25 -theta_file accuracy/lda_50_theta -clusters_file accuracy/lda_50_25_kmeans_clusters -assignments_file accuracy/lda_50_25_kmeans_assignments -iterations 100
+
+./kmeans -C 50 -theta_file accuracy/lda_50_theta -clusters_file accuracy/lda_50_50_kmeans_clusters -assignments_file accuracy/lda_50_50_kmeans_assignments -iterations 100
+
+./kmeans -C 100 -theta_file accuracy/lda_50_theta -clusters_file accuracy/lda_50_100_kmeans_clusters -assignments_file accuracy/lda_50_100_kmeans_assignments -iterations 100
+
+# K-Means Bigram
+./kmeans -C 25 -theta_file accuracy/bigram_10_theta -clusters_file accuracy/bigram_10_25_kmeans_clusters -assignments_file accuracy/bigram_10_25_kmeans_assignments -iterations 100
+
+./kmeans -C 50 -theta_file accuracy/bigram_10_theta -clusters_file accuracy/bigram_10_50_kmeans_clusters -assignments_file accuracy/bigram_10_50_kmeans_assignments -iterations 100
+
+./kmeans -C 100 -theta_file accuracy/bigram_10_theta -clusters_file accuracy/bigram_10_100_kmeans_clusters -assignments_file accuracy/bigram_10_100_kmeans_assignments -iterations 100
+
+./kmeans -C 25 -theta_file accuracy/bigram_25_theta -clusters_file accuracy/bigram_25_25_kmeans_clusters -assignments_file accuracy/bigram_25_25_kmeans_assignments -iterations 100
+
+./kmeans -C 50 -theta_file accuracy/bigram_25_theta -clusters_file accuracy/bigram_25_50_kmeans_clusters -assignments_file accuracy/bigram_25_50_kmeans_assignments -iterations 100
+
+./kmeans -C 100 -theta_file accuracy/bigram_25_theta -clusters_file accuracy/bigram_25_100_kmeans_clusters -assignments_file accuracy/bigram_25_100_kmeans_assignments -iterations 100
+
+./kmeans -C 25 -theta_file accuracy/bigram_50_theta -clusters_file accuracy/bigram_50_25_kmeans_clusters -assignments_file accuracy/bigram_50_25_kmeans_assignments -iterations 100
+
+./kmeans -C 50 -theta_file accuracy/bigram_50_theta -clusters_file accuracy/bigram_50_50_kmeans_clusters -assignments_file accuracy/bigram_50_50_kmeans_assignments -iterations 100
+
+./kmeans -C 100 -theta_file accuracy/bigram_50_theta -clusters_file accuracy/bigram_50_100_kmeans_clusters -assignments_file accuracy/bigram_50_100_kmeans_assignments -iterations 100
+
+# K-Means PCA
+./kmeans -C 25 -theta_file accuracy/pca_10_theta -clusters_file accuracy/pca_10_25_kmeans_clusters -assignments_file accuracy/pca_10_25_kmeans_assignments -iterations 100
+
+./kmeans -C 50 -theta_file accuracy/pca_10_theta -clusters_file accuracy/pca_10_50_kmeans_clusters -assignments_file accuracy/pca_10_50_kmeans_assignments -iterations 100
+
+./kmeans -C 100 -theta_file accuracy/pca_10_theta -clusters_file accuracy/pca_10_100_kmeans_clusters -assignments_file accuracy/pca_10_100_kmeans_assignments -iterations 100
+
+./kmeans -C 25 -theta_file accuracy/pca_25_theta -clusters_file accuracy/pca_25_25_kmeans_clusters -assignments_file accuracy/pca_25_25_kmeans_assignments -iterations 100
+
+./kmeans -C 50 -theta_file accuracy/pca_25_theta -clusters_file accuracy/pca_25_50_kmeans_clusters -assignments_file accuracy/pca_25_50_kmeans_assignments -iterations 100
+
+./kmeans -C 100 -theta_file accuracy/pca_25_theta -clusters_file accuracy/pca_25_100_kmeans_clusters -assignments_file accuracy/pca_25_100_kmeans_assignments -iterations 100
+
+./kmeans -C 25 -theta_file accuracy/pca_50_theta -clusters_file accuracy/pca_50_25_kmeans_clusters -assignments_file accuracy/pca_50_25_kmeans_assignments -iterations 100
+
+./kmeans -C 50 -theta_file accuracy/pca_50_theta -clusters_file accuracy/pca_50_50_kmeans_clusters -assignments_file accuracy/pca_50_50_kmeans_assignments -iterations 100
+
+./kmeans -C 100 -theta_file accuracy/pca_50_theta -clusters_file accuracy/pca_50_100_kmeans_clusters -assignments_file accuracy/pca_50_100_kmeans_assignments -iterations 100
+
+# GMM LDA
+./gmm -iterations 100 -C 25 -theta_file accuracy/lda_10_theta -clusters_file accuracy/lda_10_25_gmm_clusters -assignments_file accuracy/lda_10_25_gmm_assignments -nonparametric_false
+
+./gmm -iterations 100 -C 50 -theta_file accuracy/lda_10_theta -clusters_file accuracy/lda_10_50_gmm_clusters -assignments_file accuracy/lda_10_50_gmm_assignments -nonparametric_false
+
+./gmm -iterations 100 -C 100 -theta_file accuracy/lda_10_theta -clusters_file accuracy/lda_10_100_gmm_clusters -assignments_file accuracy/lda_10_100_gmm_assignments -nonparametric_false
+
+./gmm -iterations 100 -C 25 -theta_file accuracy/lda_25_theta -clusters_file accuracy/lda_25_25_gmm_clusters -assignments_file accuracy/lda_25_25_gmm_assignments -nonparametric_false
+
+./gmm -iterations 100 -C 50 -theta_file accuracy/lda_25_theta -clusters_file accuracy/lda_25_50_gmm_clusters -assignments_file accuracy/lda_25_50_gmm_assignments -nonparametric_false
+
+./gmm -iterations 100 -C 100 -theta_file accuracy/lda_25_theta -clusters_file accuracy/lda_25_100_gmm_clusters -assignments_file accuracy/lda_25_100_gmm_assignments -nonparametric_false
+
+./gmm -iterations 100 -C 25 -theta_file accuracy/lda_50_theta -clusters_file accuracy/lda_50_25_gmm_clusters -assignments_file accuracy/lda_50_25_gmm_assignments -nonparametric_false
+
+./gmm -iterations 100 -C 50 -theta_file accuracy/lda_50_theta -clusters_file accuracy/lda_50_50_gmm_clusters -assignments_file accuracy/lda_50_50_gmm_assignments -nonparametric_false
+
+./gmm -iterations 100 -C 100 -theta_file accuracy/lda_50_theta -clusters_file accuracy/lda_50_100_gmm_clusters -assignments_file accuracy/lda_50_100_gmm_assignments -nonparametric_false
+
+
+# GMM Bigram
+./gmm -iterations 100 -C 25 -theta_file accuracy/bigram_10_theta -clusters_file accuracy/bigram_10_25_gmm_clusters -assignments_file accuracy/bigram_10_25_gmm_assignments -nonparametric_false
+
+./gmm -iterations 100 -C 50 -theta_file accuracy/bigram_10_theta -clusters_file accuracy/bigram_10_50_gmm_clusters -assignments_file accuracy/bigram_10_50_gmm_assignments -nonparametric_false
+
+./gmm -iterations 100 -C 100 -theta_file accuracy/bigram_10_theta -clusters_file accuracy/bigram_10_100_gmm_clusters -assignments_file accuracy/bigram_10_100_gmm_assignments -nonparametric_false
+
+./gmm -iterations 100 -C 25 -theta_file accuracy/bigram_25_theta -clusters_file accuracy/bigram_25_25_gmm_clusters -assignments_file accuracy/bigram_25_25_gmm_assignments -nonparametric_false
+
+./gmm -iterations 100 -C 50 -theta_file accuracy/bigram_25_theta -clusters_file accuracy/bigram_25_50_gmm_clusters -assignments_file accuracy/bigram_25_50_gmm_assignments -nonparametric_false
+
+./gmm -iterations 100 -C 100 -theta_file accuracy/bigram_25_theta -clusters_file accuracy/bigram_25_100_gmm_clusters -assignments_file accuracy/bigram_25_100_gmm_assignments -nonparametric_false
+
+./gmm -iterations 100 -C 25 -theta_file accuracy/bigram_50_theta -clusters_file accuracy/bigram_50_25_gmm_clusters -assignments_file accuracy/bigram_50_25_gmm_assignments -nonparametric_false
+
+./gmm -iterations 100 -C 50 -theta_file accuracy/bigram_50_theta -clusters_file accuracy/bigram_50_50_gmm_clusters -assignments_file accuracy/bigram_50_50_gmm_assignments -nonparametric_false
+
+./gmm -iterations 100 -C 100 -theta_file accuracy/bigram_50_theta -clusters_file accuracy/bigram_50_100_gmm_clusters -assignments_file accuracy/bigram_50_100_gmm_assignments -nonparametric_false
+
+
+# GMM PCA
+./gmm -iterations 100 -C 25 -theta_file accuracy/pca_10_theta -clusters_file accuracy/pca_10_25_gmm_clusters -assignments_file accuracy/pca_10_25_gmm_assignments -nonparametric_false
+
+./gmm -iterations 100 -C 50 -theta_file accuracy/pca_10_theta -clusters_file accuracy/pca_10_50_gmm_clusters -assignments_file accuracy/pca_10_50_gmm_assignments -nonparametric_false
+
+./gmm -iterations 100 -C 100 -theta_file accuracy/pca_10_theta -clusters_file accuracy/pca_10_100_gmm_clusters -assignments_file accuracy/pca_10_100_gmm_assignments -nonparametric_false
+
+./gmm -iterations 100 -C 25 -theta_file accuracy/pca_25_theta -clusters_file accuracy/pca_25_25_gmm_clusters -assignments_file accuracy/pca_25_25_gmm_assignments -nonparametric_false
+
+./gmm -iterations 100 -C 50 -theta_file accuracy/pca_25_theta -clusters_file accuracy/pca_25_50_gmm_clusters -assignments_file accuracy/pca_25_50_gmm_assignments -nonparametric_false
+
+./gmm -iterations 100 -C 100 -theta_file accuracy/pca_25_theta -clusters_file accuracy/pca_25_100_gmm_clusters -assignments_file accuracy/pca_25_100_gmm_assignments -nonparametric_false
+
+./gmm -iterations 100 -C 25 -theta_file accuracy/pca_50_theta -clusters_file accuracy/pca_50_25_gmm_clusters -assignments_file accuracy/pca_50_25_gmm_assignments -nonparametric_false
+
+./gmm -iterations 100 -C 50 -theta_file accuracy/pca_50_theta -clusters_file accuracy/pca_50_50_gmm_clusters -assignments_file accuracy/pca_50_50_gmm_assignments -nonparametric_false
+
+./gmm -iterations 100 -C 100 -theta_file accuracy/pca_50_theta -clusters_file accuracy/pca_50_100_gmm_clusters -assignments_file accuracy/pca_50_100_gmm_assignments -nonparametric_false
+
+
+# DPGMM LDA
+./gmm -iterations 100 -C 25 -theta_file accuracy/lda_10_theta -clusters_file accuracy/lda_10_25_dpgmm_clusters -assignments_file accuracy/lda_10_25_dpgmm_assignments -nonparametric_true -alpha 5
+
+./gmm -iterations 100 -C 50 -theta_file accuracy/lda_10_theta -clusters_file accuracy/lda_10_50_dpgmm_clusters -assignments_file accuracy/lda_10_50_dpgmm_assignments -nonparametric_true -alpha 5
+
+./gmm -iterations 100 -C 100 -theta_file accuracy/lda_10_theta -clusters_file accuracy/lda_10_100_dpgmm_clusters -assignments_file accuracy/lda_10_100_dpgmm_assignments -nonparametric_true -alpha 5
+
+./gmm -iterations 100 -C 25 -theta_file accuracy/lda_25_theta -clusters_file accuracy/lda_25_25_dpgmm_clusters -assignments_file accuracy/lda_25_25_dpgmm_assignments -nonparametric_true -alpha 5
+
+./gmm -iterations 100 -C 50 -theta_file accuracy/lda_25_theta -clusters_file accuracy/lda_25_50_dpgmm_clusters -assignments_file accuracy/lda_25_50_dpgmm_assignments -nonparametric_true -alpha 5
+
+./gmm -iterations 100 -C 100 -theta_file accuracy/lda_25_theta -clusters_file accuracy/lda_25_100_dpgmm_clusters -assignments_file accuracy/lda_25_100_dpgmm_assignments -nonparametric_true -alpha 5
+
+./gmm -iterations 100 -C 25 -theta_file accuracy/lda_50_theta -clusters_file accuracy/lda_50_25_dpgmm_clusters -assignments_file accuracy/lda_50_25_dpgmm_assignments -nonparametric_true -alpha 5
+
+./gmm -iterations 100 -C 50 -theta_file accuracy/lda_50_theta -clusters_file accuracy/lda_50_50_dpgmm_clusters -assignments_file accuracy/lda_50_50_dpgmm_assignments -nonparametric_true -alpha 5
+
+./gmm -iterations 100 -C 100 -theta_file accuracy/lda_50_theta -clusters_file accuracy/lda_50_100_dpgmm_clusters -assignments_file accuracy/lda_50_100_dpgmm_assignments -nonparametric_true -alpha 5
+
+
+# DPGMM Bigram
+./gmm -iterations 100 -C 25 -theta_file accuracy/bigram_10_theta -clusters_file accuracy/bigram_10_25_dpgmm_clusters -assignments_file accuracy/bigram_10_25_dpgmm_assignments -nonparametric_true -alpha 5
+
+./gmm -iterations 100 -C 50 -theta_file accuracy/bigram_10_theta -clusters_file accuracy/bigram_10_50_dpgmm_clusters -assignments_file accuracy/bigram_10_50_dpgmm_assignments -nonparametric_true -alpha 5
+
+./gmm -iterations 100 -C 100 -theta_file accuracy/bigram_10_theta -clusters_file accuracy/bigram_10_100_dpgmm_clusters -assignments_file accuracy/bigram_10_100_dpgmm_assignments -nonparametric_true -alpha 5
+
+./gmm -iterations 100 -C 25 -theta_file accuracy/bigram_25_theta -clusters_file accuracy/bigram_25_25_dpgmm_clusters -assignments_file accuracy/bigram_25_25_dpgmm_assignments -nonparametric_true -alpha 5
+
+./gmm -iterations 100 -C 50 -theta_file accuracy/bigram_25_theta -clusters_file accuracy/bigram_25_50_dpgmm_clusters -assignments_file accuracy/bigram_25_50_dpgmm_assignments -nonparametric_true -alpha 5
+
+./gmm -iterations 100 -C 100 -theta_file accuracy/bigram_25_theta -clusters_file accuracy/bigram_25_100_dpgmm_clusters -assignments_file accuracy/bigram_25_100_dpgmm_assignments -nonparametric_true -alpha 5
+
+./gmm -iterations 100 -C 25 -theta_file accuracy/bigram_50_theta -clusters_file accuracy/bigram_50_25_dpgmm_clusters -assignments_file accuracy/bigram_50_25_dpgmm_assignments -nonparametric_true -alpha 5
+
+./gmm -iterations 100 -C 50 -theta_file accuracy/bigram_50_theta -clusters_file accuracy/bigram_50_50_dpgmm_clusters -assignments_file accuracy/bigram_50_50_dpgmm_assignments -nonparametric_true -alpha 5
+
+./gmm -iterations 100 -C 100 -theta_file accuracy/bigram_50_theta -clusters_file accuracy/bigram_50_100_dpgmm_clusters -assignments_file accuracy/bigram_50_100_dpgmm_assignments -nonparametric_true -alpha 5
+
+
+# DPGMM PCA
+./gmm -iterations 100 -C 25 -theta_file accuracy/pca_10_theta -clusters_file accuracy/pca_10_25_dpgmm_clusters -assignments_file accuracy/pca_10_25_dpgmm_assignments -nonparametric_true -alpha 5
+
+./gmm -iterations 100 -C 50 -theta_file accuracy/pca_10_theta -clusters_file accuracy/pca_10_50_dpgmm_clusters -assignments_file accuracy/pca_10_50_dpgmm_assignments -nonparametric_true -alpha 5
+
+./gmm -iterations 100 -C 100 -theta_file accuracy/pca_10_theta -clusters_file accuracy/pca_10_100_dpgmm_clusters -assignments_file accuracy/pca_10_100_dpgmm_assignments -nonparametric_true -alpha 5
+
+./gmm -iterations 100 -C 25 -theta_file accuracy/pca_25_theta -clusters_file accuracy/pca_25_25_dpgmm_clusters -assignments_file accuracy/pca_25_25_dpgmm_assignments -nonparametric_true -alpha 5
+
+./gmm -iterations 100 -C 50 -theta_file accuracy/pca_25_theta -clusters_file accuracy/pca_25_50_dpgmm_clusters -assignments_file accuracy/pca_25_50_dpgmm_assignments -nonparametric_true -alpha 5
+
+./gmm -iterations 100 -C 100 -theta_file accuracy/pca_25_theta -clusters_file accuracy/pca_25_100_dpgmm_clusters -assignments_file accuracy/pca_25_100_dpgmm_assignments -nonparametric_true -alpha 5
+
+./gmm -iterations 100 -C 25 -theta_file accuracy/pca_50_theta -clusters_file accuracy/pca_50_25_dpgmm_clusters -assignments_file accuracy/pca_50_25_dpgmm_assignments -nonparametric_true -alpha 5
+
+./gmm -iterations 100 -C 50 -theta_file accuracy/pca_50_theta -clusters_file accuracy/pca_50_50_dpgmm_clusters -assignments_file accuracy/pca_50_50_dpgmm_assignments -nonparametric_true -alpha 5
+
+./gmm -iterations 100 -C 100 -theta_file accuracy/pca_50_theta -clusters_file accuracy/pca_50_100_dpgmm_clusters -assignments_file accuracy/pca_50_100_dpgmm_assignments -nonparametric_true -alpha 5
+
+# Purity 10 25
+./purity -input_file data/train -assignments_file accuracy/lda_10_25_kmeans_assignments > accuracy/lda_10_25_kmeans_purity
+./purity -input_file data/train -assignments_file accuracy/bigram_10_25_kmeans_assignments > accuracy/bigram_10_25_kmeans_purity
+./purity -input_file data/train -assignments_file accuracy/pca_10_25_kmeans_assignments > accuracy/pca_10_25_kmeans_purity
+
+./purity -input_file data/train -assignments_file accuracy/lda_10_25_gmm_assignments > accuracy/lda_10_25_gmm_purity
+./purity -input_file data/train -assignments_file accuracy/bigram_10_25_gmm_assignments > accuracy/bigram_10_25_gmm_purity
+./purity -input_file data/train -assignments_file accuracy/pca_10_25_gmm_assignments > accuracy/pca_10_25_gmm_purity
+
+./purity -input_file data/train -assignments_file accuracy/lda_10_25_dpgmm_assignments > accuracy/lda_10_25_dpgmm_purity
+./purity -input_file data/train -assignments_file accuracy/bigram_10_25_dpgmm_assignments > accuracy/bigram_10_25_dpgmm_purity
+./purity -input_file data/train -assignments_file accuracy/pca_10_25_dpgmm_assignments > accuracy/pca_10_25_dpgmm_purity
+
+# Purity 10 50
+./purity -input_file data/train -assignments_file accuracy/lda_10_50_kmeans_assignments > accuracy/lda_10_50_kmeans_purity
+./purity -input_file data/train -assignments_file accuracy/bigram_10_50_kmeans_assignments > accuracy/bigram_10_50_kmeans_purity
+./purity -input_file data/train -assignments_file accuracy/pca_10_50_kmeans_assignments > accuracy/pca_10_50_kmeans_purity
+
+./purity -input_file data/train -assignments_file accuracy/lda_10_50_gmm_assignments > accuracy/lda_10_50_gmm_purity
+./purity -input_file data/train -assignments_file accuracy/bigram_10_50_gmm_assignments > accuracy/bigram_10_50_gmm_purity
+./purity -input_file data/train -assignments_file accuracy/pca_10_50_gmm_assignments > accuracy/pca_10_50_gmm_purity
+
+./purity -input_file data/train -assignments_file accuracy/lda_10_50_dpgmm_assignments > accuracy/lda_10_50_dpgmm_purity
+./purity -input_file data/train -assignments_file accuracy/bigram_10_50_dpgmm_assignments > accuracy/bigram_10_50_dpgmm_purity
+./purity -input_file data/train -assignments_file accuracy/pca_10_50_dpgmm_assignments > accuracy/pca_10_50_dpgmm_purity
+
+
+# Purity 10 100
+./purity -input_file data/train -assignments_file accuracy/lda_10_100_kmeans_assignments > accuracy/lda_10_100_kmeans_purity
+./purity -input_file data/train -assignments_file accuracy/bigram_10_100_kmeans_assignments > accuracy/bigram_10_100_kmeans_purity
+./purity -input_file data/train -assignments_file accuracy/pca_10_100_kmeans_assignments > accuracy/pca_10_100_kmeans_purity
+
+./purity -input_file data/train -assignments_file accuracy/lda_10_100_gmm_assignments > accuracy/lda_10_100_gmm_purity
+./purity -input_file data/train -assignments_file accuracy/bigram_10_100_gmm_assignments > accuracy/bigram_10_100_gmm_purity
+./purity -input_file data/train -assignments_file accuracy/pca_10_100_gmm_assignments > accuracy/pca_10_100_gmm_purity
+
+./purity -input_file data/train -assignments_file accuracy/lda_10_100_dpgmm_assignments > accuracy/lda_10_100_dpgmm_purity
+./purity -input_file data/train -assignments_file accuracy/bigram_10_100_dpgmm_assignments > accuracy/bigram_10_100_dpgmm_purity
+./purity -input_file data/train -assignments_file accuracy/pca_10_100_dpgmm_assignments > accuracy/pca_10_100_dpgmm_purity
+
+
+# Purity 25 25
+./purity -input_file data/train -assignments_file accuracy/lda_25_25_kmeans_assignments > accuracy/lda_25_25_kmeans_purity
+./purity -input_file data/train -assignments_file accuracy/bigram_25_25_kmeans_assignments > accuracy/bigram_25_25_kmeans_purity
+./purity -input_file data/train -assignments_file accuracy/pca_25_25_kmeans_assignments > accuracy/pca_25_25_kmeans_purity
+
+./purity -input_file data/train -assignments_file accuracy/lda_25_25_gmm_assignments > accuracy/lda_25_25_gmm_purity
+./purity -input_file data/train -assignments_file accuracy/bigram_25_25_gmm_assignments > accuracy/bigram_25_25_gmm_purity
+./purity -input_file data/train -assignments_file accuracy/pca_25_25_gmm_assignments > accuracy/pca_25_25_gmm_purity
+
+./purity -input_file data/train -assignments_file accuracy/lda_25_25_dpgmm_assignments > accuracy/lda_25_25_dpgmm_purity
+./purity -input_file data/train -assignments_file accuracy/bigram_25_25_dpgmm_assignments > accuracy/bigram_25_25_dpgmm_purity
+./purity -input_file data/train -assignments_file accuracy/pca_25_25_dpgmm_assignments > accuracy/pca_25_25_dpgmm_purity
+
+# Purity 25 50
+./purity -input_file data/train -assignments_file accuracy/lda_25_50_kmeans_assignments > accuracy/lda_25_50_kmeans_purity
+./purity -input_file data/train -assignments_file accuracy/bigram_25_50_kmeans_assignments > accuracy/bigram_25_50_kmeans_purity
+./purity -input_file data/train -assignments_file accuracy/pca_25_50_kmeans_assignments > accuracy/pca_25_50_kmeans_purity
+
+./purity -input_file data/train -assignments_file accuracy/lda_25_50_gmm_assignments > accuracy/lda_25_50_gmm_purity
+./purity -input_file data/train -assignments_file accuracy/bigram_25_50_gmm_assignments > accuracy/bigram_25_50_gmm_purity
+./purity -input_file data/train -assignments_file accuracy/pca_25_50_gmm_assignments > accuracy/pca_25_50_gmm_purity
+
+./purity -input_file data/train -assignments_file accuracy/lda_25_50_dpgmm_assignments > accuracy/lda_25_50_dpgmm_purity
+./purity -input_file data/train -assignments_file accuracy/bigram_25_50_dpgmm_assignments > accuracy/bigram_25_50_dpgmm_purity
+./purity -input_file data/train -assignments_file accuracy/pca_25_50_dpgmm_assignments > accuracy/pca_25_50_dpgmm_purity
+
+
+# Purity 25 100
+./purity -input_file data/train -assignments_file accuracy/lda_25_100_kmeans_assignments > accuracy/lda_25_100_kmeans_purity
+./purity -input_file data/train -assignments_file accuracy/bigram_25_100_kmeans_assignments > accuracy/bigram_25_100_kmeans_purity
+./purity -input_file data/train -assignments_file accuracy/pca_25_100_kmeans_assignments > accuracy/pca_25_100_kmeans_purity
+
+./purity -input_file data/train -assignments_file accuracy/lda_25_100_gmm_assignments > accuracy/lda_25_100_gmm_purity
+./purity -input_file data/train -assignments_file accuracy/bigram_25_100_gmm_assignments > accuracy/bigram_25_100_gmm_purity
+./purity -input_file data/train -assignments_file accuracy/pca_25_100_gmm_assignments > accuracy/pca_25_100_gmm_purity
+
+./purity -input_file data/train -assignments_file accuracy/lda_25_100_dpgmm_assignments > accuracy/lda_25_100_dpgmm_purity
+./purity -input_file data/train -assignments_file accuracy/bigram_25_100_dpgmm_assignments > accuracy/bigram_25_100_dpgmm_purity
+./purity -input_file data/train -assignments_file accuracy/pca_25_100_dpgmm_assignments > accuracy/pca_25_100_dpgmm_purity
+
+
+
+
+
+# Purity 50 25
+./purity -input_file data/train -assignments_file accuracy/lda_50_25_kmeans_assignments > accuracy/lda_50_25_kmeans_purity
+./purity -input_file data/train -assignments_file accuracy/bigram_50_25_kmeans_assignments > accuracy/bigram_50_25_kmeans_purity
+./purity -input_file data/train -assignments_file accuracy/pca_50_25_kmeans_assignments > accuracy/pca_50_25_kmeans_purity
+
+./purity -input_file data/train -assignments_file accuracy/lda_50_25_gmm_assignments > accuracy/lda_50_25_gmm_purity
+./purity -input_file data/train -assignments_file accuracy/bigram_50_25_gmm_assignments > accuracy/bigram_50_25_gmm_purity
+./purity -input_file data/train -assignments_file accuracy/pca_50_25_gmm_assignments > accuracy/pca_50_25_gmm_purity
+
+./purity -input_file data/train -assignments_file accuracy/lda_50_25_dpgmm_assignments > accuracy/lda_50_25_dpgmm_purity
+./purity -input_file data/train -assignments_file accuracy/bigram_50_25_dpgmm_assignments > accuracy/bigram_50_25_dpgmm_purity
+./purity -input_file data/train -assignments_file accuracy/pca_50_25_dpgmm_assignments > accuracy/pca_50_25_dpgmm_purity
+
+# Purity 50 50
+./purity -input_file data/train -assignments_file accuracy/lda_50_50_kmeans_assignments > accuracy/lda_50_50_kmeans_purity
+./purity -input_file data/train -assignments_file accuracy/bigram_50_50_kmeans_assignments > accuracy/bigram_50_50_kmeans_purity
+./purity -input_file data/train -assignments_file accuracy/pca_50_50_kmeans_assignments > accuracy/pca_50_50_kmeans_purity
+
+./purity -input_file data/train -assignments_file accuracy/lda_50_50_gmm_assignments > accuracy/lda_50_50_gmm_purity
+./purity -input_file data/train -assignments_file accuracy/bigram_50_50_gmm_assignments > accuracy/bigram_50_50_gmm_purity
+./purity -input_file data/train -assignments_file accuracy/pca_50_50_gmm_assignments > accuracy/pca_50_50_gmm_purity
+
+./purity -input_file data/train -assignments_file accuracy/lda_50_50_dpgmm_assignments > accuracy/lda_50_50_dpgmm_purity
+./purity -input_file data/train -assignments_file accuracy/bigram_50_50_dpgmm_assignments > accuracy/bigram_50_50_dpgmm_purity
+./purity -input_file data/train -assignments_file accuracy/pca_50_50_dpgmm_assignments > accuracy/pca_50_50_dpgmm_purity
+
+
+# Purity 50 100
+./purity -input_file data/train -assignments_file accuracy/lda_50_100_kmeans_assignments > accuracy/lda_50_100_kmeans_purity
+./purity -input_file data/train -assignments_file accuracy/bigram_50_100_kmeans_assignments > accuracy/bigram_50_100_kmeans_purity
+./purity -input_file data/train -assignments_file accuracy/pca_50_100_kmeans_assignments > accuracy/pca_50_100_kmeans_purity
+
+./purity -input_file data/train -assignments_file accuracy/lda_50_100_gmm_assignments > accuracy/lda_50_100_gmm_purity
+./purity -input_file data/train -assignments_file accuracy/bigram_50_100_gmm_assignments > accuracy/bigram_50_100_gmm_purity
+./purity -input_file data/train -assignments_file accuracy/pca_50_100_gmm_assignments > accuracy/pca_50_100_gmm_purity
+
+./purity -input_file data/train -assignments_file accuracy/lda_50_100_dpgmm_assignments > accuracy/lda_50_100_dpgmm_purity
+./purity -input_file data/train -assignments_file accuracy/bigram_50_100_dpgmm_assignments > accuracy/bigram_50_100_dpgmm_purity
+./purity -input_file data/train -assignments_file accuracy/pca_50_100_dpgmm_assignments > accuracy/pca_50_100_dpgmm_purity

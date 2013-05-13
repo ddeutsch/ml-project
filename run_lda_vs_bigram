@@ -1,0 +1,11 @@
+../lda -K 15 -iterations 1100 -burn_in 1000 -theta_file lda_vs_bigram/lda_1_theta -phi_file lda_vs_bigram/lda_1_phi -input_file data/train -likelihood_file lda_vs_bigram/lda_1_likelihood
+
+../lda -K 15 -iterations 1100 -burn_in 1000 -theta_file lda_vs_bigram/lda_2_theta -phi_file lda_vs_bigram/lda_2_phi -input_file data/train -likelihood_file lda_vs_bigram/lda_2_likelihood
+
+../lda -K 15 -iterations 1100 -burn_in 1000 -theta_file lda_vs_bigram/lda_3_theta -phi_file lda_vs_bigram/lda_3_phi -input_file data/train -likelihood_file lda_vs_bigram/lda_3_likelihood
+
+../bigram -K 15 -iterations 1100 -burn_in 1000 -theta_file lda_vs_bigram/bigram_1_theta -phi_file lda_vs_bigram/bigram_1_phi -likelihood_file lda_vs_bigram/bigram_1_likelihood -input_file data/train
+
+../bigram -K 15 -iterations 1100 -burn_in 1000 -theta_file lda_vs_bigram/bigram_2_theta -phi_file lda_vs_bigram/bigram_2_phi -likelihood_file lda_vs_bigram/bigram_2_likelihood -input_file data/train
+
+../bigram -K 15 -iterations 1100 -burn_in 1000 -theta_file lda_vs_bigram/bigram_3_theta -phi_file lda_vs_bigram/bigram_3_phi -likelihood_file lda_vs_bigram/bigram_3_likelihood -input_file data/train

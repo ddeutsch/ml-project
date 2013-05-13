@@ -12,8 +12,8 @@ import data.Tweet;
 
 public class ClusterPurity 
 {
-	private static String dataFile = "data/train";
-	private static String assignmentsFile = "output/assignments";
+	private static String dataFile = "data/train_save";
+	private static String assignmentsFile = "results/bigram_25_25_dpgmm_assignments";
 	
 	private static List<Tweet> tweets = null;
 	private static Map<Integer, List<Integer>> clusters = new HashMap<Integer, List<Integer>>();
@@ -36,7 +36,7 @@ public class ClusterPurity
 			List<Integer> labels = clusters.get(cluster);
 			double purity = purity(labels);
 			
-			if (purity > 0.5)
+			if (purity > 0.7)
 			{
 				// now we want to assign labels
 				String majorityLabel = Tweet.labels.get(getMajorityLabel(labels));

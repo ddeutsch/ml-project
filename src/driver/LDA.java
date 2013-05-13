@@ -35,7 +35,7 @@ public class LDA
 	private static int M;
 
 	/** The number of possible topics. */
-	private static int K = 15;
+	private static int K = 100;
 
 	/** The distribution over the topics for each Tweet. */
 	private static double[][] theta = null;

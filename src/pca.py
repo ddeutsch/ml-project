@@ -13,7 +13,8 @@ import numpy
 
 def main():
     train_in = sys.argv[1]
-    cutoff = int(sys.argv[2])
+    dim = int(sys.argv[2])
+    cutoff = int(sys.argv[3])
 
     
     train_csv = csv.DictReader(open(train_in,'rb'),delimiter='\t')
@@ -45,7 +46,7 @@ def main():
 
     pca = decomposition.PCA()
     
-    pca.n_components = 100
+    pca.n_components = dim
 
     for i,c in enumerate(corpus):        
         tmp = vectorizer.transform([c]).toarray()

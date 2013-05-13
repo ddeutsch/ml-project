@@ -48,7 +48,7 @@ public class GMM
 {
 	
 	//private static String inputFile = "output/lda_theta";
-	private static String thetaFile = "data/theta.old";
+	private static String thetaFile = "data/gaussian_samples 2";
 	
 	
 	
@@ -81,7 +81,7 @@ public class GMM
 	
 	
 	
-	private static double alpha = 5;
+	private static double alpha = 0.8;
 	
 	
 	private static MultivariateNormalDistribution baseDistribution;
@@ -514,16 +514,15 @@ writer.write(clusters.size() + " " + data.length + "\n");
 
 
 for (int key : clusters.keySet())
-
 {
+	Cluster cluster = clusters.get(key);
 
-Cluster cluster = clusters.get(key);
+	for (Integer id : cluster.points)
 
-for (Integer id : cluster.points)
-
-writer.write(id + " " + key + "\n");
+		writer.write(id + " " + key + "\n");
 
 }
+writer.close();
 
 }
 
