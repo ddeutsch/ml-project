@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  12 MAY 2013 21:25
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  13 MAY 2013 21:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -500,7 +500,7 @@ Package epstopdf Info: Source file: <lda_bigram_compare.eps>
 (epstopdf)                    size: 11211 bytes
 (epstopdf)             Command: <repstopdf --outfile=lda_bigram_compare-eps-con
 verted-to.pdf lda_bigram_compare.eps>
-(epstopdf)             \includegraphics on input line 164.
+(epstopdf)             \includegraphics on input line 170.
 Package epstopdf Info: Output file is already uptodate.
 
 <lda_bigram_compare-eps-converted-to.pdf, id=1, 449.68pt x 338.26375pt>
@@ -508,48 +508,42 @@ File: lda_bigram_compare-eps-converted-to.pdf Graphic file (type pdf)
 
 <use lda_bigram_compare-eps-converted-to.pdf>
 Package pdftex.def Info: lda_bigram_compare-eps-converted-to.pdf used on input 
-line 164.
+line 170.
 (pdftex.def)             Requested size: 449.6789pt x 338.26291pt.
 Package epstopdf Info: Source file: <lda_plot.eps>
 (epstopdf)                    date: 2013-05-12 21:22:19
 (epstopdf)                    size: 25701 bytes
 (epstopdf)             Output file: <lda_plot-eps-converted-to.pdf>
+(epstopdf)                    date: 2013-05-12 21:25:02
+(epstopdf)                    size: 21496 bytes
 (epstopdf)             Command: <repstopdf --outfile=lda_plot-eps-converted-to.
 pdf lda_plot.eps>
-(epstopdf)             \includegraphics on input line 170.
-runsystem(repstopdf --outfile=lda_plot-eps-converted-to.pdf lda_plot.eps)...exe
-cuted safely (allowed).
-
-Package epstopdf Info: Result file: <lda_plot-eps-converted-to.pdf>
-(epstopdf)                    date: 2013-05-12 21:25:02
-(epstopdf)                    size: 21496 bytes.
+(epstopdf)             \includegraphics on input line 176.
+Package epstopdf Info: Output file is already uptodate.
 
 <lda_plot-eps-converted-to.pdf, id=2, 449.68pt x 338.26375pt>
 File: lda_plot-eps-converted-to.pdf Graphic file (type pdf)
 
 <use lda_plot-eps-converted-to.pdf>
-Package pdftex.def Info: lda_plot-eps-converted-to.pdf used on input line 170.
+Package pdftex.def Info: lda_plot-eps-converted-to.pdf used on input line 176.
 (pdftex.def)             Requested size: 449.6789pt x 338.26291pt.
 Package epstopdf Info: Source file: <bigram_plot.eps>
 (epstopdf)                    date: 2013-05-12 21:23:16
 (epstopdf)                    size: 25083 bytes
 (epstopdf)             Output file: <bigram_plot-eps-converted-to.pdf>
+(epstopdf)                    date: 2013-05-12 21:25:03
+(epstopdf)                    size: 19678 bytes
 (epstopdf)             Command: <repstopdf --outfile=bigram_plot-eps-converted-
 to.pdf bigram_plot.eps>
-(epstopdf)             \includegraphics on input line 176.
-runsystem(repstopdf --outfile=bigram_plot-eps-converted-to.pdf bigram_plot.eps)
-...executed safely (allowed).
-
-Package epstopdf Info: Result file: <bigram_plot-eps-converted-to.pdf>
-(epstopdf)                    date: 2013-05-12 21:25:03
-(epstopdf)                    size: 19678 bytes.
+(epstopdf)             \includegraphics on input line 182.
+Package epstopdf Info: Output file is already uptodate.
 
 <bigram_plot-eps-converted-to.pdf, id=3, 449.68pt x 338.26375pt>
 File: bigram_plot-eps-converted-to.pdf Graphic file (type pdf)
 
 <use bigram_plot-eps-converted-to.pdf>
-Package pdftex.def Info: bigram_plot-eps-converted-to.pdf used on input line 17
-6.
+Package pdftex.def Info: bigram_plot-eps-converted-to.pdf used on input line 18
+2.
 (pdftex.def)             Requested size: 449.6789pt x 338.26291pt.
  [1{/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2 <
 ./lda_bigram_compare-eps-converted-to.pdf>] [3 <./lda_plot-eps-converted-to.pdf
@@ -557,14 +551,14 @@ Package pdftex.def Info: bigram_plot-eps-converted-to.pdf used on input line 17
 Here is how much of TeX's memory you used:
  3033 strings out of 493633
  40209 string characters out of 3143378
- 110887 words of memory out of 3000000
+ 112887 words of memory out of 3000000
  6273 multiletter control sequences out of 15000+200000
  8288 words of font info for 32 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
  38i,7n,23p,278b,259s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive
 /2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on tables.pdf (4 pages, 62776 bytes).
+Output written on tables.pdf (4 pages, 63511 bytes).
 PDF statistics:
  42 PDF objects out of 1000 (max. 8388607)
  28 compressed objects within 1 object stream
