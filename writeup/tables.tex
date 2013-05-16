@@ -4,6 +4,9 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{fit,positioning}
+
 \usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry}
 \begin{document}
 
@@ -182,6 +185,26 @@
 			\includegraphics[scale=1.0]{bigram_plot}
 		\end{center}
 	\end{figure}
+	
+	
+	\begin{tikzpicture}
+	\tikzstyle{main}=[circle, minimum size = 10mm, thick, draw =black!80, node distance = 12mm]
+\tikzstyle{connect}=[-latex, thick]
+\tikzstyle{box}=[rectangle, draw=black!100]
+  \node[main, fill = white!100] (z) [] {$z$};
+  \node[main, fill = black!10] (x) [right=of z] {x};
+  \node[main] (mu) [above=of z] {$\mu$};
+  \node[main] (sigma) [above=of x] {$\sigma^2$};
+  \node[main] (w) [below=of x] {w};
+  \path 
+        (z) edge [connect] (x)
+        (mu) edge [connect] (x)
+        (sigma) edge [connect] (x)
+        (w) edge [connect] (x);
+  \node[rectangle, inner sep=0mm, fit= (z) (x),label=below right:N, xshift=10.5mm, yshift=0.5mm] {};
+ \node[rectangle, inner sep=4.4mm,draw=black!100, fit= (z) (x)] {};
+
+	\end{tikzpicture}
 
 
 \end{document}

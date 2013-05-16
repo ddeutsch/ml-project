@@ -12,7 +12,6 @@ import java.util.Scanner;
 
 public class ExtractTopics 
 {
-	/** The file to find the topic-word distributions. */
 	private static String inputFile = "output/phi";
 	
 	private static String outputFile = "output/topics";

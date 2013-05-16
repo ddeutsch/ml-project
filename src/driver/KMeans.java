@@ -16,9 +16,7 @@ import data.Tweet;
 
 public class KMeans 
 {
-//	private static String tweetsFile = "data/train";
 	
-	/** The file which contains each Song's topic distributions. */
 	private static String distributionFile = "output/theta";
 	
 	/** The file to write the clusters to. */
@@ -33,8 +31,8 @@ public class KMeans
 	/** The centroids of the clusters. */
 	private static double[][] clusters = null;
 	
-	/** The thetas of the songs, mapping from ID to distribution. */
-	private static Map<Integer, double[]> songs = new HashMap<Integer, double[]>();
+	/** The thetas of the tweets, mapping from ID to distribution. */
+	private static Map<Integer, double[]> tweets = new HashMap<Integer, double[]>();
 	
 	private static List<List<Integer>> assignments = new ArrayList<List<Integer>>();
 	
@@ -47,15 +45,6 @@ public class KMeans
 	/** The number of topics. */
 	private static int K;
 	
-	/**
-	 * This method should run the K-Means clustering algorithm
-	 * on the Songs from the Song file based on their respective
-	 * distributions in the distribution file.
-	 * 
-	 * @param args The arguments will be the location of
-	 * the topic distributions file, the desired output file name, 
-	 * and then K, the number of clusters.
-	 */
 	public static void main(String[] args) 
 	{
 		// parse the command line arguments
@@ -74,8 +63,8 @@ public class KMeans
 			KMeans.K = Integer.parseInt(split[1]);
 			
 			// set up by initializing clusters and randomly assigning documents
-			KMeans.readSongs(scanner);
-			KMeans.clusters = DataInitializer.initializeClusters(C, K, KMeans.songs);
+			KMeans.readTweets(scanner);
+			KMeans.clusters = DataInitializer.initializeClusters(C, K, KMeans.tweets);
 			
 			for (int iteration = 0; iteration < iterations; iteration++)
 			{
@@ -149,7 +138,7 @@ public class KMeans
 		}
 	}
 	
-	private static void readSongs(Scanner scanner)
+	private static void readTweets(Scanner scanner)
 	{
 		while (scanner.hasNextLine())
 		{
@@ -161,7 +150,7 @@ public class KMeans
 			for (int k = 1; k < split.length; k++)
 				distribution[k - 1] = Double.parseDouble(split[k]);
 			
-			KMeans.songs.put(id, distribution);
+			KMeans.tweets.put(id, distribution);
 		}
 	}
 	
@@ -173,9 +162,9 @@ public class KMeans
 			KMeans.assignments.add(new ArrayList<Integer>());
 		
 		// assign Songs to the closest clusters
-		for (Integer id : KMeans.songs.keySet())
+		for (Integer id : KMeans.tweets.keySet())
 		{
-			double[] distribution = KMeans.songs.get(id);
+			double[] distribution = KMeans.tweets.get(id);
 			
 			double minimumDistance = Double.POSITIVE_INFINITY;
 			int minimumLabel = -1;
@@ -206,7 +195,7 @@ public class KMeans
 			// compute the sum for each Song
 			for (Integer id : ids)
 			{
-				double[] song = KMeans.songs.get(id);
+				double[] song = KMeans.tweets.get(id);
 				
 				for (int k = 0; k < K; k++)
 					average[k] += song[k]; 

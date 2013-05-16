@@ -2,12 +2,6 @@ package data;
 
 import java.util.Random;
 
-/**
- * This class represents a multinomial distribution. Specifically,
- * it provides the ability to sample from that distribution.
- * 
- * @author Daniel Deutsch
- */
 public class Multinomial 
 {
 	/** The backing distribution. */
@@ -16,11 +10,6 @@ public class Multinomial
 	/** The random seed to use to sample. */
 	private Random random = new Random();
 	
-	/**
-	 * The constructor for the Multinomial which performs
-	 * the normalization step.
-	 * @param distribution The base distribution.
-	 */
 	public Multinomial(double[] distribution)
 	{
 		this.distribution = distribution;

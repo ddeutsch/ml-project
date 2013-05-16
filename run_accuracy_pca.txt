@@ -1,4 +1,6 @@
 # PCA
+put your code here to output the files to accuracy/pca_10_theta, accuracy/pca_25_theta and accuracy/pca_50_theta
+
 
 # K-Means PCA
 ./kmeans -C 25 -theta_file accuracy/pca_10_theta -clusters_file accuracy/pca_10_25_kmeans_clusters -assignments_file accuracy/pca_10_25_kmeans_assignments -iterations 100
@@ -86,57 +88,33 @@
 
 
 # Purity 10 100
-./purity -input_file data/train -assignments_file accuracy/lda_10_100_kmeans_assignments > accuracy/lda_10_100_kmeans_purity
-./purity -input_file data/train -assignments_file accuracy/bigram_10_100_kmeans_assignments > accuracy/bigram_10_100_kmeans_purity
 ./purity -input_file data/train -assignments_file accuracy/pca_10_100_kmeans_assignments > accuracy/pca_10_100_kmeans_purity
 
-./purity -input_file data/train -assignments_file accuracy/lda_10_100_gmm_assignments > accuracy/lda_10_100_gmm_purity
-./purity -input_file data/train -assignments_file accuracy/bigram_10_100_gmm_assignments > accuracy/bigram_10_100_gmm_purity
 ./purity -input_file data/train -assignments_file accuracy/pca_10_100_gmm_assignments > accuracy/pca_10_100_gmm_purity
 
-./purity -input_file data/train -assignments_file accuracy/lda_10_100_dpgmm_assignments > accuracy/lda_10_100_dpgmm_purity
-./purity -input_file data/train -assignments_file accuracy/bigram_10_100_dpgmm_assignments > accuracy/bigram_10_100_dpgmm_purity
 ./purity -input_file data/train -assignments_file accuracy/pca_10_100_dpgmm_assignments > accuracy/pca_10_100_dpgmm_purity
 
 
 # Purity 25 25
-./purity -input_file data/train -assignments_file accuracy/lda_25_25_kmeans_assignments > accuracy/lda_25_25_kmeans_purity
-./purity -input_file data/train -assignments_file accuracy/bigram_25_25_kmeans_assignments > accuracy/bigram_25_25_kmeans_purity
 ./purity -input_file data/train -assignments_file accuracy/pca_25_25_kmeans_assignments > accuracy/pca_25_25_kmeans_purity
 
-./purity -input_file data/train -assignments_file accuracy/lda_25_25_gmm_assignments > accuracy/lda_25_25_gmm_purity
-./purity -input_file data/train -assignments_file accuracy/bigram_25_25_gmm_assignments > accuracy/bigram_25_25_gmm_purity
 ./purity -input_file data/train -assignments_file accuracy/pca_25_25_gmm_assignments > accuracy/pca_25_25_gmm_purity
 
-./purity -input_file data/train -assignments_file accuracy/lda_25_25_dpgmm_assignments > accuracy/lda_25_25_dpgmm_purity
-./purity -input_file data/train -assignments_file accuracy/bigram_25_25_dpgmm_assignments > accuracy/bigram_25_25_dpgmm_purity
 ./purity -input_file data/train -assignments_file accuracy/pca_25_25_dpgmm_assignments > accuracy/pca_25_25_dpgmm_purity
 
 # Purity 25 50
-./purity -input_file data/train -assignments_file accuracy/lda_25_50_kmeans_assignments > accuracy/lda_25_50_kmeans_purity
-./purity -input_file data/train -assignments_file accuracy/bigram_25_50_kmeans_assignments > accuracy/bigram_25_50_kmeans_purity
 ./purity -input_file data/train -assignments_file accuracy/pca_25_50_kmeans_assignments > accuracy/pca_25_50_kmeans_purity
 
-./purity -input_file data/train -assignments_file accuracy/lda_25_50_gmm_assignments > accuracy/lda_25_50_gmm_purity
-./purity -input_file data/train -assignments_file accuracy/bigram_25_50_gmm_assignments > accuracy/bigram_25_50_gmm_purity
 ./purity -input_file data/train -assignments_file accuracy/pca_25_50_gmm_assignments > accuracy/pca_25_50_gmm_purity
 
-./purity -input_file data/train -assignments_file accuracy/lda_25_50_dpgmm_assignments > accuracy/lda_25_50_dpgmm_purity
-./purity -input_file data/train -assignments_file accuracy/bigram_25_50_dpgmm_assignments > accuracy/bigram_25_50_dpgmm_purity
 ./purity -input_file data/train -assignments_file accuracy/pca_25_50_dpgmm_assignments > accuracy/pca_25_50_dpgmm_purity
 
 
 # Purity 25 100
-./purity -input_file data/train -assignments_file accuracy/lda_25_100_kmeans_assignments > accuracy/lda_25_100_kmeans_purity
-./purity -input_file data/train -assignments_file accuracy/bigram_25_100_kmeans_assignments > accuracy/bigram_25_100_kmeans_purity
 ./purity -input_file data/train -assignments_file accuracy/pca_25_100_kmeans_assignments > accuracy/pca_25_100_kmeans_purity
 
-./purity -input_file data/train -assignments_file accuracy/lda_25_100_gmm_assignments > accuracy/lda_25_100_gmm_purity
-./purity -input_file data/train -assignments_file accuracy/bigram_25_100_gmm_assignments > accuracy/bigram_25_100_gmm_purity
 ./purity -input_file data/train -assignments_file accuracy/pca_25_100_gmm_assignments > accuracy/pca_25_100_gmm_purity
 
-./purity -input_file data/train -assignments_file accuracy/lda_25_100_dpgmm_assignments > accuracy/lda_25_100_dpgmm_purity
-./purity -input_file data/train -assignments_file accuracy/bigram_25_100_dpgmm_assignments > accuracy/bigram_25_100_dpgmm_purity
 ./purity -input_file data/train -assignments_file accuracy/pca_25_100_dpgmm_assignments > accuracy/pca_25_100_dpgmm_purity
 
 
@@ -144,41 +122,23 @@
 
 
 # Purity 50 25
-./purity -input_file data/train -assignments_file accuracy/lda_50_25_kmeans_assignments > accuracy/lda_50_25_kmeans_purity
-./purity -input_file data/train -assignments_file accuracy/bigram_50_25_kmeans_assignments > accuracy/bigram_50_25_kmeans_purity
 ./purity -input_file data/train -assignments_file accuracy/pca_50_25_kmeans_assignments > accuracy/pca_50_25_kmeans_purity
 
-./purity -input_file data/train -assignments_file accuracy/lda_50_25_gmm_assignments > accuracy/lda_50_25_gmm_purity
-./purity -input_file data/train -assignments_file accuracy/bigram_50_25_gmm_assignments > accuracy/bigram_50_25_gmm_purity
 ./purity -input_file data/train -assignments_file accuracy/pca_50_25_gmm_assignments > accuracy/pca_50_25_gmm_purity
 
-./purity -input_file data/train -assignments_file accuracy/lda_50_25_dpgmm_assignments > accuracy/lda_50_25_dpgmm_purity
-./purity -input_file data/train -assignments_file accuracy/bigram_50_25_dpgmm_assignments > accuracy/bigram_50_25_dpgmm_purity
 ./purity -input_file data/train -assignments_file accuracy/pca_50_25_dpgmm_assignments > accuracy/pca_50_25_dpgmm_purity
 
 # Purity 50 50
-./purity -input_file data/train -assignments_file accuracy/lda_50_50_kmeans_assignments > accuracy/lda_50_50_kmeans_purity
-./purity -input_file data/train -assignments_file accuracy/bigram_50_50_kmeans_assignments > accuracy/bigram_50_50_kmeans_purity
 ./purity -input_file data/train -assignments_file accuracy/pca_50_50_kmeans_assignments > accuracy/pca_50_50_kmeans_purity
 
-./purity -input_file data/train -assignments_file accuracy/lda_50_50_gmm_assignments > accuracy/lda_50_50_gmm_purity
-./purity -input_file data/train -assignments_file accuracy/bigram_50_50_gmm_assignments > accuracy/bigram_50_50_gmm_purity
 ./purity -input_file data/train -assignments_file accuracy/pca_50_50_gmm_assignments > accuracy/pca_50_50_gmm_purity
 
-./purity -input_file data/train -assignments_file accuracy/lda_50_50_dpgmm_assignments > accuracy/lda_50_50_dpgmm_purity
-./purity -input_file data/train -assignments_file accuracy/bigram_50_50_dpgmm_assignments > accuracy/bigram_50_50_dpgmm_purity
 ./purity -input_file data/train -assignments_file accuracy/pca_50_50_dpgmm_assignments > accuracy/pca_50_50_dpgmm_purity
 
 
 # Purity 50 100
-./purity -input_file data/train -assignments_file accuracy/lda_50_100_kmeans_assignments > accuracy/lda_50_100_kmeans_purity
-./purity -input_file data/train -assignments_file accuracy/bigram_50_100_kmeans_assignments > accuracy/bigram_50_100_kmeans_purity
 ./purity -input_file data/train -assignments_file accuracy/pca_50_100_kmeans_assignments > accuracy/pca_50_100_kmeans_purity
 
-./purity -input_file data/train -assignments_file accuracy/lda_50_100_gmm_assignments > accuracy/lda_50_100_gmm_purity
-./purity -input_file data/train -assignments_file accuracy/bigram_50_100_gmm_assignments > accuracy/bigram_50_100_gmm_purity
 ./purity -input_file data/train -assignments_file accuracy/pca_50_100_gmm_assignments > accuracy/pca_50_100_gmm_purity
 
-./purity -input_file data/train -assignments_file accuracy/lda_50_100_dpgmm_assignments > accuracy/lda_50_100_dpgmm_purity
-./purity -input_file data/train -assignments_file accuracy/bigram_50_100_dpgmm_assignments > accuracy/bigram_50_100_dpgmm_purity
 ./purity -input_file data/train -assignments_file accuracy/pca_50_100_dpgmm_assignments > accuracy/pca_50_100_dpgmm_purity

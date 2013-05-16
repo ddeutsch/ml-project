@@ -6,23 +6,10 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-/**
- * This is a utility class responsible for initializing
- * different parameter vectors, like the distribution of topics
- * per Song, the genres of each Song, etc.
- * 
- * @author Daniel Deutsch
- */
 public class DataInitializer 
 {
 	private static Random random = new Random();
 	
-	/**
-	 * Initializes the vector gamma, the genre for each Song.
-	 * @param numberOfSongs The total number of Songs.
-	 * @param numberOfGenres The total number of genres.
-	 * @return The randomized gamma vector.
-	 */
 	public static int[] initializeGamma(int numberOfSongs, int numberOfGenres)
 	{
 		// there is one genre per song
@@ -35,13 +22,6 @@ public class DataInitializer
 		return gamma;
 	}
 	
-	/**
-	 * Initializes the theta array, the distribution over topics for each Song
-	 * with a uniform prior.
-	 * @param numberOfSongs The total number of Songs.
-	 * @param numberOfTopics The total number of topics.
-	 * @return The uniform theta array.
-	 */
 	public static double[][] initializeTheta(int numberOfSongs, int numberOfTopics)
 	{
 		// each song has a distribution over topics
@@ -59,13 +39,6 @@ public class DataInitializer
 		return theta;
 	}
 	
-	/**
-	 * Initializes the 2D array of phi to the uniform distribution over
-	 * all of the words in the vocabulary.
-	 * @param numberOfTopics The number of topics.
-	 * @param vocabularySize The size of the vocabulary.
-	 * @return The uniform phi array.
-	 */
 	public static double[][] initializePhi(int numberOfTopics, int vocabularySize)
 	{
 		// each topic has a distribution over the words
@@ -80,13 +53,6 @@ public class DataInitializer
 		return phi;
 	}
 	
-	/**
-	 * Initializes the 2D array, z, the topics that generated each word
-	 * in each Tweet.
-	 * @param songs The List of tweets.
-	 * @param numberOfTopics The number of possible topics.
-	 * @return The randomly initialized 2D array, z.
-	 */
 	public static int[][] initializeZ(List<Tweet> tweets, int numberOfTopics)
 	{
 		// create a jagged array for each song
@@ -104,12 +70,6 @@ public class DataInitializer
 		return z;
 	}
 	
-	/**
-	 * Initializes the cluster centers from 0 to 1.
-	 * @param C The number of cluster centers. 
-	 * @param K The number of topics (the dimension of each cluster).
-	 * @return The randomized vectors.
-	 */
 	public static double[][] initializeClusters(int C, int K, Map<Integer, double[]> map)
 	{
 		double[][] clusters = new double[C][K];
